@@ -1,0 +1,343 @@
+####################################################################################
+# Machine type: NEPTUNE 4 MAX
+# Current configuration version: CoPrint-v0.0.0
+# Date：2024-6-24
+####################################################################################
+# This product (Neptune 4/4pro/4plus/4max) adopts Klipper firmware
+# and does not support users to update the official klipper/fluidd
+# /moonraker by themselves, otherwise the machine will not work properly.
+# If you want to DIY and are an expert or interested in this field,
+# we recommend that you prepare your own tools for burning images so
+# that you can restore them if problems arise. Please contact after-sales
+# support team for tutorials on burning images. Thank you for your cooperation!
+####################################################################################
+# This file contains common pin mappings for ZNP-K1-V2.0
+# boards. To use this config, the firmware should be compiled for the
+# STM32F402. When running "make menuconfig", enable "extra low-level
+# configuration setup", select the 32KiB bootloader, and serial (on
+# USART1 PA10/PA9) communication.
+
+# The "make flash" command does not work on the ZNP-K1-V2.0. Instead,
+# after running "make", copy the generated "out/klipper.bin" file to a
+# file named "elegoo_k1.bin" on an SD card and then restart the ZNP-K1-V2.0
+# with that SD card.
+
+# See docs/Config_Reference.md for a description of parameters.
+####################################################################################
+
+# Macro to store user configurable variables
+# NOTE: Do not call this macro as it is not intended to be called.
+[gcode_macro _PRINTER_CONFIGURATION]
+description: Printer configuration values
+#variable_EXAMPLE_VARIABLE: EXAMPLE_VALUE
+gcode:
+    {action_raise_error('This macro is not intended to be called or executed.')}
+
+# Include CoPrint specific files
+[include CoPrint/kcm.cfg]
+[include CoPrint/chroma_head.cfg]
+[include CoPrint/input_shaper.cfg]
+[include CoPrint/ecm_1.cfg]
+#[include CoPrint/ecm_2.cfg]
+#[include CoPrint/ecm_3.cfg]
+#[include CoPrint/ecm_4.cfg]
+[include CoPrint/cp_macro.cfg]
+[include CoPrint/extruder.cfg]
+#[include CoPrint/filament_switch_sensor.cfg]
+[include CoPrint/configuration_variables.cfg]
+[include CoPrint/elegoo_macros.cfg]
+
+[include plr.cfg]
+
+[virtual_pins]
+
+[mcu]
+# The hardware use USART1 PA10/PA9 connect to RK3328
+serial: /dev/ttyS0
+restart_method: command
+
+[stepper_x]
+step_pin: PC14
+dir_pin: PC13
+enable_pin: !PC15
+microsteps: 16
+rotation_distance: 40
+full_steps_per_rotation: 200
+endstop_pin: !PC0                              # Physical end-stop switch modification
+#endstop_pin:tmc2209_stepper_x:virtual_endstop # Sensorless homing
+#position_min: -0.1                            # Stock
+#position_endstop: 0                           # Stock
+#position_max: 430.1                           # Stock
+position_min: -1.3                             # ChromaHead specific values (TBStron3D linear rails and bracket)
+position_endstop: -1.3                         # ChromaHead specific values (TBStron3D linear rails and bracket)
+position_max: 420                              # ChromaHead specific values (TBStron3D linear rails and bracket)
+homing_speed: 50
+homing_retract_dist: 0
+homing_positive_dir: false
+
+[stepper_y]
+step_pin: PB4
+dir_pin: PB3
+enable_pin: !PC15
+microsteps: 16
+rotation_distance: 40
+full_steps_per_rotation: 200
+endstop_pin: !PB8                               # Physical end-stop switch modification
+#endstop_pin: tmc2209_stepper_y:virtual_endstop # Sensorless homing
+#position_min: -0.1                             # Stock
+#position_endstop: 0                            # Stock
+#position_max: 430.1                            # Stock
+position_min: 11                                # ChromaHead specific values (TBStron3D linear rails and bracket)
+position_endstop: 11                            # ChromaHead specific values (TBStron3D linear rails and bracket)
+position_max: 443                               # ChromaHead specific values (TBStron3D linear rails and bracket)
+homing_speed: 50
+homing_retract_dist: 0
+homing_positive_dir: false
+
+[stepper_z]
+step_pin:PC10
+dir_pin:!PA13
+enable_pin: !PC11
+microsteps: 16
+rotation_distance: 8
+full_steps_per_rotation: 200
+endstop_pin:probe:z_virtual_endstop
+position_max: 482.5
+position_min: -5
+homing_speed: 8
+homing_retract_dist: 5
+second_homing_speed: 3
+
+[heater_bed]
+heater_pin:PB10
+sensor_type: NTC 100K MGB18-104F39050L32
+sensor_pin: PA0
+max_power: 1.0
+control : pid
+pid_kp : 75.397
+pid_ki : 0.823
+pid_kd : 1727.531
+pwm_cycle_time: 0.016
+min_temp: 0
+max_temp: 100
+
+[verify_heater heater_bed]
+max_error: 120
+check_gain_time:300
+hysteresis: 10
+heating_gain: 2
+
+[controller_fan mainboard_fan]
+pin: PC7 # fan1 connector on mainboard
+shutdown_speed: 1
+stepper: stepper_x, stepper_y, stepper_z
+
+[fan_generic auxiliary_fan]
+pin: PB7
+
+# [fan_generic fan3]
+# pin: PC9
+
+# [fan_generic fan4]
+# pin: PA8
+
+# [fan_generic fan5]
+# pin: PA15
+
+[printer]
+kinematics:cartesian
+max_velocity: 500
+max_accel: 2000
+max_z_velocity: 10
+max_z_accel: 100
+square_corner_velocity: 9.0
+
+####################################################################
+#	Homing and Gantry Adjustment Routines
+#####################################################################
+[safe_z_home]
+home_xy_position: 182, 216.5
+speed: 200
+z_hop: 10
+z_hop_speed: 5
+
+#####################################################################
+# 	Probe
+#####################################################################
+
+[bed_mesh]
+speed: 200
+horizontal_move_z: 10
+#mesh_min: 20,30      # Stock values from elegoo_conf.ini and LCD
+#mesh_max: 395,400    # Stock values from elegoo_conf.ini and LCD
+mesh_min: 35,20       # ChromaHead specific values (TBStron3D linear rails and bracket)
+mesh_max: 400,400     # ChromaHead specific values (TBStron3D linear rails and bracket)
+#probe_count: 6,6     # Standard (6x6) mode
+probe_count: 11,11    # Professional (11x11) mode
+algorithm: bicubic
+bicubic_tension: 0.2
+mesh_pps: 2, 2
+fade_start: 5.0
+fade_end: 30.0
+
+#####################################################################
+# LED Control
+#####################################################################
+
+[gcode_macro FLASHLIGHT_SWITCH]
+description: Switch Hotend LEDs
+gcode:
+  RUN_SHELL_COMMAND CMD=FLASHLIGHT
+
+[gcode_shell_command FLASHLIGHT]
+command: sh /home/mks/sled2.sh
+timeout: 5.
+
+########################################
+# TMC UART configuration
+########################################
+
+[tmc2209 stepper_x]
+uart_pin: PB9
+run_current: 1.0
+hold_current: 0.8
+interpolate: True
+stealthchop_threshold:0
+driver_SGTHRS:90
+diag_pin:^PC0
+
+[tmc2209 stepper_y]
+uart_pin: PD2
+run_current: 1.4
+hold_current: 0.8
+interpolate: True
+stealthchop_threshold:0
+driver_SGTHRS:80
+diag_pin:^PB8
+
+[tmc2209 stepper_z]
+uart_pin: PC5
+run_current: 0.8
+hold_current: 0.5
+interpolate: True
+stealthchop_threshold: 0
+
+[mcu rpi]
+serial: /tmp/klipper_host_mcu
+
+[adxl345 y]
+cs_pin: rpi:None
+spi_bus: spidev0.1
+axes_map:-x,-y,-z
+
+[resonance_tester]
+accel_chip_x: adxl345 x
+accel_chip_y: adxl345 y
+max_smoothing:1
+min_freq: 5
+max_freq: 90
+accel_per_hz: 120
+hz_per_sec: 2
+probe_points: 215, 215, 20
+
+[force_move]
+enable_force_move : true
+
+[respond]
+default_type: echo
+default_prefix: echo:
+
+[virtual_sdcard]
+path: ~/gcode_files
+on_error_gcode:
+    # test OK
+    G91
+    G1 Z25 F900
+    G90
+    TURN_OFF_HEATERS
+    M106 S100
+    M84
+    M300 P10000 S1
+    G4 P300
+    M300
+    M300
+    M300
+    M300
+    M300
+    M300
+    M300
+    M300
+    M300
+    M300
+    M300
+
+[pause_resume]
+recover_velocity: 50.0
+
+# Dummy filament runout sensor to prevent errors from
+# the makerbase-client's automated system setup calls.
+[filament_switch_sensor fila]
+switch_pin: virtual_pin:fila
+
+[delayed_gcode KINEMATIC_POSITION]
+initial_duration:3.0
+gcode:
+      SET_KINEMATIC_POSITION X=110
+      SET_KINEMATIC_POSITION Y=110
+      SET_KINEMATIC_POSITION Z=0
+
+################ Buzzer configuration ##################
+[output_pin beeper]
+pin: PA2
+pwm: true
+shutdown_value:0
+value:0.0
+
+####################################################################
+## Additional objects
+####################################################################
+
+[print_stats]
+
+[gcode_move]
+
+[display_status]
+
+[gcode_arcs]
+resolution: 0.1
+
+[exclude_object]
+
+#*# <---------------------- SAVE_CONFIG ---------------------->
+#*# DO NOT EDIT THIS BLOCK OR BELOW. The contents are auto-generated.
+#*#
+#*# [bed_mesh 11]
+#*# version = 1
+#*# points =
+#*# 	  -0.020000, -0.075000, -0.097500, -0.057500, -0.085000, -0.115000, -0.085000, -0.072500, -0.025000, 0.007500, -0.002500
+#*# 	  -0.062500, -0.095000, -0.102500, -0.070000, -0.070000, -0.097500, -0.067500, -0.070000, -0.020000, 0.012500, -0.017500
+#*# 	  -0.102500, -0.125000, -0.125000, -0.077500, -0.085000, -0.110000, -0.070000, -0.075000, -0.025000, 0.007500, -0.025000
+#*# 	  -0.067500, -0.085000, -0.090000, -0.035000, -0.042500, -0.070000, -0.037500, -0.047500, -0.007500, 0.025000, -0.007500
+#*# 	  -0.050000, -0.062500, -0.057500, -0.002500, -0.005000, -0.032500, 0.005000, -0.005000, 0.032500, 0.067500, 0.017500
+#*# 	  -0.032500, -0.055000, -0.040000, 0.017500, 0.025000, -0.010000, 0.022500, 0.012500, 0.040000, 0.075000, 0.020000
+#*# 	  -0.062500, -0.070000, -0.057500, 0.017500, 0.025000, -0.007500, 0.022500, 0.000000, 0.030000, 0.050000, -0.022500
+#*# 	  -0.095000, -0.100000, -0.080000, -0.010000, 0.007500, -0.027500, -0.002500, -0.030000, -0.010000, 0.012500, -0.065000
+#*# 	  -0.090000, -0.087500, -0.085000, -0.017500, -0.010000, -0.035000, -0.020000, -0.050000, -0.027500, -0.012500, -0.077500
+#*# 	  -0.057500, -0.062500, -0.062500, -0.010000, -0.010000, -0.037500, -0.015000, -0.035000, -0.002500, 0.015000, -0.042500
+#*# 	  -0.035000, -0.047500, -0.050000, -0.007500, -0.015000, -0.050000, -0.027500, -0.042500, -0.005000, 0.022500, -0.017500
+#*# tension = 0.2
+#*# min_x = 35.0
+#*# algo = bicubic
+#*# y_count = 11
+#*# mesh_y_pps = 2
+#*# min_y = 20.0
+#*# x_count = 11
+#*# max_y = 400.0
+#*# mesh_x_pps = 2
+#*# max_x = 400.0
+#*#
+#*# [input_shaper]
+#*# shaper_type_x = ei
+#*# shaper_freq_x = 50.6
+#*# shaper_type_y = mzv
+#*# shaper_freq_y = 23.0
