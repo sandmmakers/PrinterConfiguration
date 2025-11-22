@@ -36,14 +36,13 @@ gcode:
 # Include CoPrint specific files
 [include CoPrint/kcm.cfg]
 [include CoPrint/chroma_head.cfg]
-[include CoPrint/input_shaper.cfg]
-[include CoPrint/ecm_1.cfg]
+#[include CoPrint/filament_switch_sensor.cfg]
+#[include CoPrint/ecm_1.cfg]
 #[include CoPrint/ecm_2.cfg]
 #[include CoPrint/ecm_3.cfg]
 #[include CoPrint/ecm_4.cfg]
 [include CoPrint/cp_macro.cfg]
 [include CoPrint/extruder.cfg]
-#[include CoPrint/filament_switch_sensor.cfg]
 [include CoPrint/configuration_variables.cfg]
 [include CoPrint/elegoo_macros.cfg]
 
