@@ -48,8 +48,6 @@ gcode:
 
 [include plr.cfg]
 
-[virtual_pins]
-
 [mcu]
 # The hardware use USART1 PA10/PA9 connect to RK3328
 serial: /dev/ttyS0
@@ -273,10 +271,22 @@ on_error_gcode:
 [pause_resume]
 recover_velocity: 50.0
 
-# Dummy filament runout sensor to prevent errors from
-# the makerbase-client's automated system setup calls.
-[filament_switch_sensor fila]
-switch_pin: virtual_pin:fila
+[gcode_macro QUERY_FILAMENT_SENSOR]
+rename_existing: QUERY_FILAMENT_SENSOR_STOCK
+gcode:
+    {% set sensor = params.SENSOR %}
+    {% if sensor != 'fila' %}
+        QUERY_FILAMENT_SENSOR_STOCK SENSOR={sensor}
+    {% endif %}
+
+[gcode_macro SET_FILAMENT_SENSOR]
+rename_existing: SET_FILAMENT_SENSOR_STOCK
+gcode:
+    {% set sensor = params.SENSOR %}
+    {% set enable = params.ENABLE %}
+    {% if sensor != 'fila' %}
+        SET_FILAMENT_SENSOR_STOCK SENSOR={sensor} ENABLE={enable}
+    {% endif %}
 
 [delayed_gcode KINEMATIC_POSITION]
 initial_duration:3.0
