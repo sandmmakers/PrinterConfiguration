@@ -294,6 +294,7 @@ gcode:
 [gcode_macro SET_FILAMENT_SENSOR]
 rename_existing: SET_FILAMENT_SENSOR_STOCK
 gcode:
+    D118 SET_FILAMENT_SENSOR {rawparams}
     {% set sensor = params.SENSOR %}
     {% set enable = params.ENABLE %}
     {% if sensor != 'fila' %}
