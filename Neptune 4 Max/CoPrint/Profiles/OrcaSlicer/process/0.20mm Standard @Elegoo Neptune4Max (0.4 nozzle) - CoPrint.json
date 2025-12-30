@@ -1,0 +1,11 @@
+{
+    "from": "User",
+    "inherits": "0.2mm Standard @Co Print ChromaSet 0.4",
+    "is_custom_defined": "0",
+    "name": "0.20mm Standard @Elegoo Neptune4Max (0.4 nozzle) - CoPrint",
+    "print_settings_id": "0.20mm Standard @Elegoo Neptune4Max (0.4 nozzle) - CoPrint",
+    "version": "2.3.1.10",
+    "compatible_printers": [
+        "Elegoo Neptune 4 Max (0.4 nozzle) - CoPrint"
+    ]
+}

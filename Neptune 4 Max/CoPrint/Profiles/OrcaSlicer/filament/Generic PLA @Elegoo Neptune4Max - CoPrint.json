@@ -1,0 +1,13 @@
+{
+    "filament_settings_id": [
+        "Generic PLA @Elegoo Neptune4Max - CoPrint"
+    ],
+    "from": "User",
+    "inherits": "CoPrint Generic PLA",
+    "is_custom_defined": "0",
+    "name": "Generic PLA @Elegoo Neptune4Max - CoPrint",
+    "version": "2.3.1.10",
+    "compatible_printers": [
+        "Elegoo Neptune 4 Max (0.4 nozzle) - CoPrint"
+    ]
+}

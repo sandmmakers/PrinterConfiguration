@@ -1,0 +1,57 @@
+{
+    "before_layer_change_gcode": "\n",
+    "change_filament_gcode": "FILAMENT_CHANGE LAYER_NUMBER=[layer_num] NEXT_EXTRUDER=[next_extruder]",
+    "cooling_tube_length": "0",
+    "cooling_tube_retraction": "0",
+    "default_filament_profile": [
+        "Generic PLA @Elegoo Neptune4Max - CoPrint"
+    ],
+    "default_print_profile": "0.20mm Standard @Elegoo Neptune4Max (0.4 nozzle) - CoPrint",
+    "default_bed_type": "Textured PEI Plate",
+    "deretraction_speed": [
+        "30"
+    ],
+    "extra_loading_move": "0",
+    "extruder_clearance_height_to_lid": "475",
+    "extruder_clearance_height_to_rod": "3",
+    "extruder_clearance_radius": "67",
+    "from": "User",
+    "high_current_on_filament_swap": "1",
+    "inherits": "Elegoo Neptune 4 Max (0.4 nozzle)",
+    "is_custom_defined": "0",
+    "layer_change_gcode": "",
+    "machine_end_gcode": "END_PRINT",
+    "machine_load_filament_time": "9.75",
+    "machine_max_acceleration_e": [
+        "2500",
+        "5000"
+    ],
+    "machine_max_jerk_e": [
+        "2.5",
+        "5"
+    ],
+    "machine_max_speed_e": [
+        "100",
+        "60"
+    ],
+    "machine_start_gcode": "START_PRINT EXTRUDER=[initial_extruder] EXTRUDER_TEMP=[nozzle_temperature_initial_layer] BED_TEMP=[bed_temperature_initial_layer_single] BED_MESH_PROFILE=11",
+    "machine_unload_filament_time": "9.75",
+    "name": "Elegoo Neptune 4 Max (0.4 nozzle) - CoPrint",
+    "nozzle_type": "hardened_steel",
+    "parking_pos_retraction": "25",
+    "printer_settings_id": "Elegoo Neptune 4 Max (0.4 nozzle) - CoPrint",
+    "retract_before_wipe": [
+        "0%"
+    ],
+    "retract_when_changing_layer": [
+        "0"
+    ],
+    "retraction_length": [
+        "0.5"
+    ],
+    "support_multi_bed_types": "1",
+    "version": "2.3.1.10",
+    "wipe_distance": [
+        "2"
+    ]
+}
