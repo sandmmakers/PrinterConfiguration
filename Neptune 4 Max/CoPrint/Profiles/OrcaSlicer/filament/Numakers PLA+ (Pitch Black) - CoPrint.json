@@ -2,6 +2,9 @@
     "compatible_printers": [
         "Elegoo Neptune 4 Max (0.4 nozzle) - CoPrint"
     ],
+    "default_filament_colour": [
+        "#000000"
+    ],
     "dont_slow_down_outer_wall": [
         "1"
     ],
