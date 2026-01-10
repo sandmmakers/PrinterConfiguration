@@ -1,11 +1,26 @@
 {
-    "from": "User",
-    "inherits": "0.2mm Standard @Co Print ChromaSet 0.4",
-    "is_custom_defined": "0",
-    "name": "0.20mm Standard @Elegoo Neptune4Max (0.4 nozzle) - CoPrint",
-    "print_settings_id": "0.20mm Standard @Elegoo Neptune4Max (0.4 nozzle) - CoPrint",
-    "version": "2.3.1.10",
+    "accel_to_decel_enable": "0",
+    "bridge_acceleration": "50%",
     "compatible_printers": [
         "Elegoo Neptune 4 Max (0.4 nozzle) - CoPrint"
-    ]
+    ],
+    "default_acceleration": "3000",
+    "default_jerk": "7",
+    "from": "User",
+    "infill_jerk": "7",
+    "inherits": "0.2mm Standard @Co Print ChromaSet 0.4",
+    "initial_layer_acceleration": "1000",
+    "initial_layer_jerk": "7",
+    "initial_layer_print_height": "0.2",
+    "inner_wall_acceleration": "2000",
+    "inner_wall_jerk": "6",
+    "is_custom_defined": "0",
+    "layer_height": "0.2",
+    "name": "0.20mm Standard @Elegoo Neptune4Max (0.4 nozzle) - CoPrint",
+    "outer_wall_jerk": "6",
+    "print_settings_id": "0.20mm Standard @Elegoo Neptune4Max (0.4 nozzle) - CoPrint",
+    "top_surface_jerk": "7",
+    "travel_acceleration": "3000",
+    "travel_jerk": "7",
+    "version": "2.3.1.10"
 }
