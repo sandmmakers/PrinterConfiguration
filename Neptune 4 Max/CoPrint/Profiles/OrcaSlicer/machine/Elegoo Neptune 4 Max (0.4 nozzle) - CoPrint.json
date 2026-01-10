@@ -3,14 +3,15 @@
     "change_filament_gcode": "FILAMENT_CHANGE LAYER_NUMBER=[layer_num] NEXT_EXTRUDER=[next_extruder]",
     "cooling_tube_length": "0",
     "cooling_tube_retraction": "0",
+    "default_bed_type": "Textured PEI Plate",
     "default_filament_profile": [
         "Generic PLA @Elegoo Neptune4Max - CoPrint"
     ],
     "default_print_profile": "0.20mm Standard @Elegoo Neptune4Max (0.4 nozzle) - CoPrint",
-    "default_bed_type": "Textured PEI Plate",
     "deretraction_speed": [
         "30"
     ],
+    "enable_filament_ramming": "0",
     "extra_loading_move": "0",
     "extruder_clearance_height_to_lid": "475",
     "extruder_clearance_height_to_rod": "3",
@@ -38,7 +39,8 @@
     "machine_unload_filament_time": "9.75",
     "name": "Elegoo Neptune 4 Max (0.4 nozzle) - CoPrint",
     "nozzle_type": "hardened_steel",
-    "parking_pos_retraction": "25",
+    "nozzle_volume": "156",
+    "parking_pos_retraction": "0",
     "printer_settings_id": "Elegoo Neptune 4 Max (0.4 nozzle) - CoPrint",
     "retract_before_wipe": [
         "0%"
