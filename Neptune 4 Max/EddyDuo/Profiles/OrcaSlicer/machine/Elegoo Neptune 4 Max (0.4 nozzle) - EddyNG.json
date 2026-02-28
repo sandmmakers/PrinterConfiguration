@@ -1,0 +1,10 @@
+{
+    "from": "User",
+    "inherits": "Elegoo Neptune 4 Max (0.4 nozzle)",
+    "is_custom_defined": "0",
+    "machine_end_gcode": "END_PRINT",
+    "machine_start_gcode": "START_PRINT1 EXTRUDER_TEMP=[nozzle_temperature_initial_layer] BED_TEMP=[bed_temperature_initial_layer_single] TAP_ADJUST_Z=0.00\nSTART_PRINT2 EXTRUDER_TEMP=[nozzle_temperature_initial_layer] BED_TEMP=[bed_temperature_initial_layer_single] TAP_ADJUST_Z=0.00",
+    "name": "Elegoo Neptune 4 Max (0.4 nozzle) - EddyNG",
+    "printer_settings_id": "Elegoo Neptune 4 Max (0.4 nozzle) - EddyNG",
+    "version": "2.3.1.10"
+}
